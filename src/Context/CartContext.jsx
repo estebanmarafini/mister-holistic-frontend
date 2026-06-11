@@ -182,7 +182,7 @@ export const CartProvider = ({ children }) => {
         emailPayload.email = localStorage.getItem('mh_registered_email');
       }
 
-      const res = await fetch(`${API_URL}/email/order-created`, {
+      const res = await fetch(`${API_URL}/api/email/order-created`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

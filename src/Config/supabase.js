@@ -8,3 +8,13 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Verificar la conexión con la base de datos
+supabase.from('productos').select('id').limit(1)
+  .then(({ error }) => {
+    if (error) {
+      console.error('Error de conexión con Supabase (Frontend):', error.message);
+    } else {
+      console.log('¡Conexión con la base de datos de Supabase exitosa (Frontend)!');
+    }
+  });

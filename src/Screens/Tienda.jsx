@@ -23,7 +23,7 @@ export const Tienda = () => {
           let catFilter = selectedCategory;
           if (selectedCategory === 'Joyas Sagradas') catFilter = 'Joyas';
           if (selectedCategory === 'Velas Alquímicas') catFilter = 'Velas';
-          
+
           query = query.ilike('nombre', `%${catFilter}%`);
         }
 
@@ -60,13 +60,13 @@ export const Tienda = () => {
         {/* Pricing Toggle Component */}
         <div className="pricing-toggle-container">
           <div className={`pricing-toggle-slider ${priceTier === 'mayorista' ? 'wholesale' : ''}`}></div>
-          <button 
+          <button
             className={`pricing-toggle-btn ${priceTier === 'minorista' ? 'active' : ''}`}
             onClick={() => togglePriceTier('minorista')}
           >
             Precio Minorista
           </button>
-          <button 
+          <button
             className={`pricing-toggle-btn ${priceTier === 'mayorista' ? 'active' : ''}`}
             onClick={() => togglePriceTier('mayorista')}
           >
@@ -107,9 +107,9 @@ export const Tienda = () => {
               return (
                 <div key={product.id} className="product-card">
                   <div className="product-image-wrapper">
-                    <img 
-                      src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'} 
-                      alt={product.nombre} 
+                    <img
+                      src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'}
+                      alt={product.nombre}
                       className="product-image"
                     />
                     {product.stock <= 3 && product.stock > 0 && (
@@ -131,7 +131,7 @@ export const Tienda = () => {
                         <span className="product-price">${Number(price).toFixed(2)}</span>
                         <span className="product-price-label">{priceTier}</span>
                       </div>
-                      <button 
+                      <button
                         className="add-cart-circle-btn"
                         onClick={() => addToCart(product, 1)}
                         disabled={product.stock <= 0}
