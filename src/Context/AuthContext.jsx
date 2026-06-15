@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   const sendOTP = async (email) => {
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/auth/send-otp`, {
+      const res = await fetch(`${API_URL}/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   const registerClient = async (formData) => {
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/auth/register`, {
+      const res = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   const loginClient = async (dni, contrasena) => {
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dni: parseInt(dni), contrasena })
@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }) => {
   const recoverPassword = async (dni, email) => {
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/api/auth/recover-password`, {
+      const res = await fetch(`${API_URL}/auth/recover-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dni: parseInt(dni), email })

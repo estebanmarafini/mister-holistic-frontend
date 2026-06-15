@@ -169,7 +169,7 @@ export const CartProvider = ({ children }) => {
       };
 
       const emailPayload = {
-        email: user.dni ? `${user.nombre.toLowerCase()}@misterholistic.com` : 'cliente@ejemplo.com', // Valor por defecto si no hay campo email
+        email: user.email || (user.dni ? `${user.nombre.toLowerCase()}@misterholistic.com` : 'cliente@ejemplo.com'),
         clientName: `${user.nombre} ${user.apellido}`,
         orderId: orderId,
         items: cartItems,
@@ -182,7 +182,7 @@ export const CartProvider = ({ children }) => {
         emailPayload.email = localStorage.getItem('mh_registered_email');
       }
 
-      const res = await fetch(`${API_URL}/api/email/order-created`, {
+      const res = await fetch(`${API_URL}/email/order-created`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

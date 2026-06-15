@@ -44,7 +44,8 @@ export const AdminDashboard = () => {
             apellido,
             dni,
             telefono,
-            domicilio
+            domicilio,
+            email
           ),
           detalles_pedido (
             id,
@@ -218,7 +219,7 @@ export const AdminDashboard = () => {
       };
 
       const emailPayload = {
-        email: `${order.clientes.nombre.toLowerCase()}@misterholistic.com`, // email ficticio o recuperado
+        email: order.clientes.email || `${order.clientes.nombre.toLowerCase()}@misterholistic.com`, // email real o ficticio
         clientName: `${order.clientes.nombre} ${order.clientes.apellido}`,
         orderId: order.id,
         status: finalStatus,
@@ -234,7 +235,7 @@ export const AdminDashboard = () => {
         emailPayload.email = registeredEmail;
       }
 
-      const res = await fetch(`${API_URL}/api/email/order-status-updated`, {
+      const res = await fetch(`${API_URL}/email/order-status-updated`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
