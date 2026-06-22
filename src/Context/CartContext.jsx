@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { supabase } from '../Config/supabase';
+import { useAuth } from '../Hooks/useAuth';
 
 export const CartContext = createContext();
 
@@ -7,9 +8,17 @@ const API_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/a
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [priceTier, setPriceTier] = useState('minorista'); // 'minorista' o 'mayorista'
+  const [priceTier, setPriceTier] = useState('mayorista'); // Por defecto 'mayorista'
   const [cartOpen, setCartOpen] = useState(false);
   const [orderSubmitting, setOrderSubmitting] = useState(false);
+  const { user } = useAuth();
+
+  // Forzar tarifa mayorista para clientes registrados
+  useEffect(() => {
+    if (user && user.rol !== 'admin') {
+      setPriceTier('mayorista');
+    }
+  }, [user]);
 
   // Cargar carrito guardado en localStorage al iniciar
   useEffect(() => {
@@ -99,10 +108,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const getShippingCost = () => {
-    const subtotal = getSubtotal();
-    // Envio gratis a partir de $25000 (o lo que el usuario decida)
-    if (subtotal >= 25000 || subtotal === 0) return 0;
-    return 1500; // Costo fijo de envío de presupuesto
+    return 0; // No se realizan envíos, el costo siempre es 0
   };
 
   const getTotal = () => {

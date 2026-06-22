@@ -75,23 +75,6 @@ export const Carrito = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '32px' }} className="grid-cols-3">
           {/* Listado de Productos */}
           <div style={{ gridColumn: 'span 2' }}>
-            {/* Envío Gratis Banner */}
-            {leftForFreeShipping > 0 ? (
-              <div style={{ backgroundColor: '#f2e1c0', color: '#706349', padding: '16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                <span className="material-symbols-outlined">local_shipping</span>
-                <span style={{ fontSize: '14px', fontWeight: '500' }}>
-                  ¡Estás a <strong>${leftForFreeShipping.toFixed(2)}</strong> de obtener envío gratis!
-                </span>
-              </div>
-            ) : (
-              <div style={{ backgroundColor: '#beecde', color: '#00201a', padding: '16px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                <span className="material-symbols-outlined">local_shipping</span>
-                <span style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                  ¡Felicidades! Tienes envío gratis en esta orden.
-                </span>
-              </div>
-            )}
-
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {cartItems.map((item) => {
                 const price = priceTier === 'mayorista' ? item.precio_mayorista : item.precio_minorista;
@@ -155,16 +138,6 @@ export const Carrito = () => {
               <h2 style={{ fontSize: '20px', fontFamily: 'Newsreader', borderBottom: '1px solid #c0c8c4', paddingBottom: '8px', marginBottom: '20px' }}>Resumen del Pedido</h2>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                  <span style={{ color: '#404846' }}>Subtotal</span>
-                  <span style={{ fontWeight: '600' }}>${subtotal.toFixed(2)}</span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
-                  <span style={{ color: '#404846' }}>Envío Estimado</span>
-                  <span style={{ fontWeight: '600' }}>
-                    {shipping === 0 ? 'GRATIS' : `$${shipping.toFixed(2)}`}
-                  </span>
-                </div>
                 {discountAmount > 0 && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: '#ba1a1a' }}>
                     <span>Descuento (10%)</span>
@@ -202,7 +175,7 @@ export const Carrito = () => {
               {/* Total final */}
               <div style={{ borderTop: '2px solid rgba(12,59,50,0.1)', paddingTop: '16px', marginBottom: '24px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <span style={{ fontSize: '18px', fontFamily: 'Newsreader', fontWeight: 'bold' }}>Total Estimado:</span>
+                  <span style={{ fontSize: '18px', fontFamily: 'Newsreader', fontWeight: 'bold' }}>Total:</span>
                   <div style={{ textAlign: 'right' }}>
                     <span style={{ fontSize: '26px', fontFamily: 'Newsreader', fontWeight: 'bold', color: '#0c3b32', display: 'block', lineHeight: '1' }}>
                       ${finalTotal.toFixed(2)}
@@ -210,25 +183,6 @@ export const Carrito = () => {
                     <span style={{ fontSize: '10px', color: '#717976' }}>IVA incluido (presupuesto)</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Alternar precio de tarifa desde resumen */}
-              <div className="pricing-toggle-container" style={{ width: '100%', marginBottom: '20px' }}>
-                <div className={`pricing-toggle-slider ${priceTier === 'mayorista' ? 'wholesale' : ''}`} style={{ width: 'calc(50% - 4px)' }}></div>
-                <button 
-                  className={`pricing-toggle-btn ${priceTier === 'minorista' ? 'active' : ''}`}
-                  style={{ flexGrow: 1, textAlign: 'center' }}
-                  onClick={() => togglePriceTier('minorista')}
-                >
-                  Minorista
-                </button>
-                <button 
-                  className={`pricing-toggle-btn ${priceTier === 'mayorista' ? 'active' : ''}`}
-                  style={{ flexGrow: 1, textAlign: 'center' }}
-                  onClick={() => togglePriceTier('mayorista')}
-                >
-                  Mayorista
-                </button>
               </div>
 
               <button 

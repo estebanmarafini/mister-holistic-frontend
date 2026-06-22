@@ -115,18 +115,8 @@ export const CartDrawer = () => {
 
         {cartItems.length > 0 && (
           <div className="drawer-footer">
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px', fontSize: '14px', color: '#404846' }}>
-              <span>Subtotal:</span>
-              <span style={{ fontWeight: 'bold', color: '#0c3b32' }}>${getSubtotal().toFixed(2)}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px', fontSize: '14px', color: '#404846' }}>
-              <span>Envío estimado:</span>
-              <span style={{ fontWeight: 'bold', color: '#0c3b32' }}>
-                {getShippingCost() === 0 ? 'GRATIS' : `$${getShippingCost().toFixed(2)}`}
-              </span>
-            </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px', borderTop: '2px solid #efeded', paddingTop: '16px' }}>
-              <span style={{ fontSize: '18px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>Total Estimado:</span>
+              <span style={{ fontSize: '18px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>Total:</span>
               <span style={{ fontSize: '20px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>${getTotal().toFixed(2)}</span>
             </div>
             

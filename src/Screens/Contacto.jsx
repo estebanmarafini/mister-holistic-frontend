@@ -138,7 +138,7 @@ export const Contacto = () => {
               >
                 <option value="Consulta General">Consulta General</option>
                 <option value="Pedidos Mayoristas">Pedidos Mayoristas</option>
-                <option value="Estado de Envío">Estado de Envío</option>
+                <option value="Estado de Presupuesto">Estado de Presupuesto</option>
                 <option value="Colaboraciones">Colaboraciones</option>
               </select>
             </div>

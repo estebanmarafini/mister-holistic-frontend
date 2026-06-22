@@ -14,7 +14,7 @@ export const Footer = () => {
             <h4 style={{ fontSize: '13px', fontWeight: '600', color: '#0c3b32', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '16px' }}>Soporte</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li><Link to="/contacto" style={{ fontSize: '14px', color: '#404846' }}>Contacto</Link></li>
-              <li><Link to="/contacto" style={{ fontSize: '14px', color: '#404846' }}>Envíos y Devoluciones</Link></li>
+              <li><Link to="/contacto" style={{ fontSize: '14px', color: '#404846' }}>Devoluciones</Link></li>
             </ul>
           </div>
           <div>

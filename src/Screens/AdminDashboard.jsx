@@ -211,11 +211,10 @@ export const AdminDashboard = () => {
       // 2. Disparar API de correo electrónico en Backend
       // Cálculo de totales final
       const subtotal = finalItems.reduce((acc, item) => acc + (item.precio_aplicado * item.cantidad), 0);
-      const shipping = subtotal >= 25000 || subtotal === 0 ? 0 : 1500;
       const totalsObj = {
         subtotal,
-        shipping,
-        total: subtotal + shipping
+        shipping: 0,
+        total: subtotal
       };
 
       const emailPayload = {
