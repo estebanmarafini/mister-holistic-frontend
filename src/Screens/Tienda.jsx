@@ -9,7 +9,13 @@ export const Tienda = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { addToCart, priceTier, togglePriceTier } = useCart();
 
-  const selectedCategory = searchParams.get('categoria') || 'Todos';
+  const rawCategory = searchParams.get('categoria') || 'Todos';
+
+  // Normalizar el filtro de la URL para que coincida con los botones del frontend
+  let activeCategory = rawCategory;
+  if (rawCategory === 'Joyas' || rawCategory === 'Bijou') activeCategory = 'Joyas Sagradas';
+  if (rawCategory === 'Velas') activeCategory = 'Velas Alquímicas';
+  if (rawCategory === 'Aromatizantes') activeCategory = 'Aromas';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,14 +23,17 @@ export const Tienda = () => {
       try {
         let query = supabase.from('productos').select('*').eq('disponibilidad', true);
 
-        // Si hay una categoría seleccionada y no es 'Todos'
-        if (selectedCategory !== 'Todos') {
-          // Mapear categorías del filtro a coincidencias parciales o exactas en la BD
-          let catFilter = selectedCategory;
-          if (selectedCategory === 'Joyas Sagradas') catFilter = 'Joyas';
-          if (selectedCategory === 'Velas Alquímicas') catFilter = 'Velas';
-
-          query = query.ilike('nombre', `%${catFilter}%`);
+        // Aplicar filtros basados en la categoría normalizada buscando en el nombre de forma flexible
+        if (activeCategory !== 'Todos') {
+          if (activeCategory === 'Aromas') {
+            query = query.or('nombre.ilike.%esencia%,nombre.ilike.%aceite%,nombre.ilike.%difusor%,nombre.ilike.%humidificador%,nombre.ilike.%aromatizador%');
+          } else if (activeCategory === 'Inciensos') {
+            query = query.or('nombre.ilike.%incienso%,nombre.ilike.%sahumerio%,nombre.ilike.%sahumo%,nombre.ilike.%bomba%,nombre.ilike.%pastilla%');
+          } else if (activeCategory === 'Joyas Sagradas') {
+            query = query.or('nombre.ilike.%dije%,nombre.ilike.%pulsera%,nombre.ilike.%collar%,nombre.ilike.%anillo%,nombre.ilike.%péndulo%,nombre.ilike.%cristal%,nombre.ilike.%gemas%,nombre.ilike.%piedra%,nombre.ilike.%cuarzo%,nombre.ilike.%tarot%,nombre.ilike.%oraculo%');
+          } else if (activeCategory === 'Velas Alquímicas') {
+            query = query.ilike('nombre', '%vela%');
+          }
         }
 
         const { data, error } = await query;
@@ -37,7 +46,7 @@ export const Tienda = () => {
       }
     };
     fetchProducts();
-  }, [selectedCategory]);
+  }, [activeCategory]);
 
   const handleCategorySelect = (category) => {
     if (category === 'Todos') {
@@ -81,7 +90,7 @@ export const Tienda = () => {
           {['Todos', 'Aromas', 'Inciensos', 'Joyas Sagradas', 'Velas Alquímicas'].map((cat) => (
             <button
               key={cat}
-              className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+              className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
               onClick={() => handleCategorySelect(cat)}
             >
               {cat}
