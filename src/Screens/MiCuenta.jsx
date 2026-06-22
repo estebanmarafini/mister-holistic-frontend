@@ -3,21 +3,21 @@ import { useAuth } from '../Hooks/useAuth';
 import { supabase } from '../Config/supabase';
 
 export const MiCuenta = () => {
-  const { 
-    user, 
-    token, 
-    loading: authLoading, 
-    loginClient, 
-    sendOTP, 
-    registerClient, 
-    recoverPassword 
+  const {
+    user,
+    token,
+    loading: authLoading,
+    loginClient,
+    sendOTP,
+    registerClient,
+    recoverPassword
   } = useAuth();
 
   // Estados de vista
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [isRecoveryMode, setIsRecoveryMode] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
-  
+
   // Estado para órdenes cargadas
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
@@ -30,7 +30,6 @@ export const MiCuenta = () => {
     apellido: '',
     dni: '',
     telefono: '',
-    domicilio: '',
     contrasena: '',
     email: '',
     otp: ''
@@ -97,12 +96,12 @@ export const MiCuenta = () => {
   };
 
   const handleSendOTPClick = async () => {
-    const { email, nombre, apellido, dni, telefono, domicilio, contrasena } = registerForm;
-    if (!email || !nombre || !apellido || !dni || !telefono || !domicilio || !contrasena) {
+    const { email, nombre, apellido, dni, telefono, contrasena } = registerForm;
+    if (!email || !nombre || !apellido || !dni || !telefono || !contrasena) {
       setFormError('Por favor completa todos los campos del registro antes de solicitar el código.');
       return;
     }
-    
+
     setSubmitting(true);
     setFormError(null);
     setFormSuccess(null);
@@ -119,8 +118,8 @@ export const MiCuenta = () => {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    const { nombre, apellido, dni, telefono, domicilio, contrasena, email, otp } = registerForm;
-    
+    const { nombre, apellido, dni, telefono, contrasena, email, otp } = registerForm;
+
     if (!otp) {
       setFormError('Por favor ingresa el código OTP que enviamos a tu email.');
       return;
@@ -132,18 +131,17 @@ export const MiCuenta = () => {
     try {
       // Guardar localmente el email registrado para enviar confirmaciones futuras
       localStorage.setItem('mh_registered_email', email);
-      
+
       await registerClient({
         nombre,
         apellido,
         dni: parseInt(dni),
         telefono: parseInt(telefono),
-        domicilio,
         contrasena,
         email,
         otp
       });
-      
+
       setFormSuccess('¡Registro completado e inicio de sesión exitoso!');
     } catch (err) {
       setFormError(err.message);
@@ -179,20 +177,20 @@ export const MiCuenta = () => {
 
   return (
     <div className="max-width-container" style={{ padding: '64px 32px', minHeight: '100vh' }}>
-      
+
       {/* Vista de Usuario NO Logueado */}
       {!user ? (
         <div style={{ maxWidth: '480px', margin: '0 auto', backgroundColor: '#ffffff', padding: '40px', borderRadius: '16px', border: '1px solid #efeded', boxShadow: '0 4px 20px rgba(12,59,50,0.04)' }}>
-          
+
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h1 className="text-headline-lg" style={{ marginBottom: '8px' }}>
               {isRecoveryMode ? 'Recuperar Contraseña' : isRegisterMode ? 'Crear Cuenta' : 'Mi Cuenta'}
             </h1>
             <p style={{ color: '#404846', fontSize: '14px' }}>
-              {isRecoveryMode 
-                ? 'Introduce tus datos para enviarte una contraseña provisoria.' 
-                : isRegisterMode 
-                  ? 'Únete a Mister Holistic para guardar tus presupuestos.' 
+              {isRecoveryMode
+                ? 'Introduce tus datos para enviarte una contraseña provisoria.'
+                : isRegisterMode
+                  ? 'Únete a Mister Holistic para guardar tus presupuestos.'
                   : 'Bienvenido de nuevo a tu portal consciente.'
               }
             </p>
@@ -206,33 +204,33 @@ export const MiCuenta = () => {
             <form onSubmit={handleRecoverySubmit}>
               <div className="form-group">
                 <label className="form-label">DNI del Cliente</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   value={recoveryForm.dni}
                   onChange={(e) => setRecoveryForm(prev => ({ ...prev, dni: e.target.value }))}
-                  placeholder="Ej. 34567890" 
-                  className="form-input" 
+                  placeholder="Ej. 34567890"
+                  className="form-input"
                   required
                 />
               </div>
               <div className="form-group">
                 <label className="form-label">Correo Electrónico de Recepción</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={recoveryForm.email}
                   onChange={(e) => setRecoveryForm(prev => ({ ...prev, email: e.target.value }))}
-                  placeholder="email@ejemplo.com" 
-                  className="form-input" 
+                  placeholder="email@ejemplo.com"
+                  className="form-input"
                   required
                 />
               </div>
               <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '16px' }} disabled={submitting}>
                 {submitting ? 'Enviando email...' : 'Enviar Contraseña Provisoria'}
               </button>
-              <button 
-                type="button" 
-                className="btn-outline" 
-                style={{ width: '100%', marginTop: '8px' }} 
+              <button
+                type="button"
+                className="btn-outline"
+                style={{ width: '100%', marginTop: '8px' }}
                 onClick={() => { setIsRecoveryMode(false); setFormError(null); }}
               >
                 Volver a Iniciar Sesión
@@ -244,91 +242,79 @@ export const MiCuenta = () => {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div className="form-group">
                   <label className="form-label">Nombre</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={registerForm.nombre}
                     onChange={(e) => setRegisterForm(prev => ({ ...prev, nombre: e.target.value }))}
-                    placeholder="Juan" 
-                    className="form-input" 
-                    required 
+                    placeholder="Juan"
+                    className="form-input"
+                    required
                     disabled={otpSent}
                   />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Apellido</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={registerForm.apellido}
                     onChange={(e) => setRegisterForm(prev => ({ ...prev, apellido: e.target.value }))}
-                    placeholder="Pérez" 
-                    className="form-input" 
-                    required 
+                    placeholder="Pérez"
+                    className="form-input"
+                    required
                     disabled={otpSent}
                   />
                 </div>
               </div>
-              
+
               <div className="form-group">
                 <label className="form-label">DNI (Documento)</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   value={registerForm.dni}
                   onChange={(e) => setRegisterForm(prev => ({ ...prev, dni: e.target.value }))}
-                  placeholder="34567890" 
-                  className="form-input" 
-                  required 
+                  placeholder="34567890"
+                  className="form-input"
+                  required
                   disabled={otpSent}
                 />
               </div>
 
               <div className="form-group">
                 <label className="form-label">Teléfono</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   value={registerForm.telefono}
                   onChange={(e) => setRegisterForm(prev => ({ ...prev, telefono: e.target.value }))}
-                  placeholder="3834123456" 
-                  className="form-input" 
-                  required 
+                  placeholder="3834123456"
+                  className="form-input"
+                  required
                   disabled={otpSent}
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Domicilio de Entrega</label>
-                <input 
-                  type="text" 
-                  value={registerForm.domicilio}
-                  onChange={(e) => setRegisterForm(prev => ({ ...prev, domicilio: e.target.value }))}
-                  placeholder="Calle de la Calma 123" 
-                  className="form-input" 
-                  required 
-                  disabled={otpSent}
-                />
-              </div>
 
               <div className="form-group">
                 <label className="form-label">Correo Electrónico (Para Validación)</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={registerForm.email}
                   onChange={(e) => setRegisterForm(prev => ({ ...prev, email: e.target.value }))}
-                  placeholder="juanperez@gmail.com" 
-                  className="form-input" 
-                  required 
+                  placeholder="juanperez@gmail.com"
+                  className="form-input"
+                  required
                   disabled={otpSent}
                 />
               </div>
 
               <div className="form-group">
                 <label className="form-label">Contraseña</label>
-                <input 
-                  type="password" 
+                <input
+                  type="password"
                   value={registerForm.contrasena}
                   onChange={(e) => setRegisterForm(prev => ({ ...prev, contrasena: e.target.value }))}
-                  placeholder="Contraseña segura" 
-                  className="form-input" 
-                  required 
+                  placeholder="Contraseña segura"
+                  className="form-input"
+                  required
                   disabled={otpSent}
                 />
               </div>
@@ -337,12 +323,12 @@ export const MiCuenta = () => {
                 <div style={{ border: '1px solid #c0c8c4', padding: '16px', borderRadius: '8px', backgroundColor: '#f5f3f3', marginTop: '16px' }}>
                   <div className="form-group">
                     <label className="form-label" style={{ color: '#0c3b32', fontWeight: 'bold' }}>Introduce el Código OTP de 6 dígitos</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={registerForm.otp}
                       onChange={(e) => setRegisterForm(prev => ({ ...prev, otp: e.target.value }))}
-                      placeholder="Ej. 123456" 
-                      className="form-input" 
+                      placeholder="Ej. 123456"
+                      className="form-input"
                       style={{ fontSize: '20px', letterSpacing: '4px', textAlign: 'center', backgroundColor: '#ffffff' }}
                       required
                     />
@@ -352,9 +338,9 @@ export const MiCuenta = () => {
                   </button>
                 </div>
               ) : (
-                <button 
-                  type="button" 
-                  className="btn-primary" 
+                <button
+                  type="button"
+                  className="btn-primary"
                   style={{ width: '100%', marginTop: '16px' }}
                   onClick={handleSendOTPClick}
                   disabled={submitting}
@@ -375,33 +361,33 @@ export const MiCuenta = () => {
             <form onSubmit={handleLoginSubmit}>
               <div className="form-group">
                 <label className="form-label">DNI del Cliente</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   value={loginForm.dni}
                   onChange={(e) => setLoginForm(prev => ({ ...prev, dni: e.target.value }))}
-                  placeholder="34567890" 
-                  className="form-input" 
+                  placeholder="34567890"
+                  className="form-input"
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <label className="form-label">Contraseña</label>
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     style={{ fontSize: '12px', color: '#695d43', textDecoration: 'underline' }}
                     onClick={() => { setIsRecoveryMode(true); setFormError(null); setFormSuccess(null); }}
                   >
                     ¿Olvidaste tu contraseña?
                   </button>
                 </div>
-                <input 
-                  type="password" 
+                <input
+                  type="password"
                   value={loginForm.contrasena}
                   onChange={(e) => setLoginForm(prev => ({ ...prev, contrasena: e.target.value }))}
-                  placeholder="••••••••" 
-                  className="form-input" 
+                  placeholder="••••••••"
+                  className="form-input"
                   required
                 />
               </div>
@@ -430,7 +416,7 @@ export const MiCuenta = () => {
             </div>
             <div style={{ display: 'flex', gap: '12px' }}>
               <span className="badge badge-approved" style={{ padding: '8px 16px', fontSize: '13px' }}>
-                Tarifa: {user.rol === 'admin' ? 'Administrador' : 'Minorista'}
+                Tarifa: {user.rol === 'admin' ? 'Administrador' : 'Mayorista'}
               </span>
             </div>
           </div>
@@ -438,7 +424,7 @@ export const MiCuenta = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
             {/* Sidebar / Info Perfil */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              
+
               {/* Resumen Perfil */}
               <div style={{ backgroundColor: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #efeded', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
@@ -454,7 +440,7 @@ export const MiCuenta = () => {
                 <div style={{ borderTop: '1px solid #efeded', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#717976' }}>Estatus de Cliente</span>
-                    <span style={{ fontWeight: 'bold', color: '#0c3b32' }}>{user.rol === 'admin' ? 'Administrador' : 'Cliente Minorista'}</span>
+                    <span style={{ fontWeight: 'bold', color: '#0c3b32' }}>{user.rol === 'admin' ? 'Administrador' : 'Cliente Mayorista'}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#717976' }}>Teléfono</span>
@@ -465,14 +451,6 @@ export const MiCuenta = () => {
                     <span style={{ fontWeight: '500' }}>{new Date(user.fecha_registro || Date.now()).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Domicilio Principal */}
-              <div style={{ backgroundColor: '#ffffff', padding: '32px', borderRadius: '16px', border: '1px solid #efeded', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-                <h3 className="text-headline-md" style={{ marginBottom: '16px' }}>Domicilio de Entrega</h3>
-                <p style={{ fontWeight: 'bold', marginBottom: '6px' }}>Dirección de Presupuesto</p>
-                <p style={{ color: '#404846', fontSize: '15px', lineHeight: '1.5' }}>{user.domicilio}</p>
-                <p style={{ color: '#717976', fontSize: '13px', marginTop: '12px' }}>* Modificable al momento de emitir pedido.</p>
               </div>
 
             </div>
@@ -508,8 +486,8 @@ export const MiCuenta = () => {
                     if (order.estado === 'Modificado') badgeClass = 'badge-modified';
 
                     return (
-                      <div 
-                        key={order.id} 
+                      <div
+                        key={order.id}
                         style={{ padding: '20px', borderRadius: '8px', backgroundColor: '#f5f3f3', border: '1px solid #efeded', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}
                       >
                         <div>
@@ -517,7 +495,7 @@ export const MiCuenta = () => {
                           <p style={{ color: '#717976', fontSize: '13px' }}>
                             {new Date(order.fecha_pedido).toLocaleDateString('es-ES')} • {itemsCount} productos
                           </p>
-                          
+
                           {/* Detalle rápido */}
                           <div style={{ marginTop: '8px', fontSize: '12px', color: '#404846' }}>
                             {order.detalles_pedido?.map(d => (
