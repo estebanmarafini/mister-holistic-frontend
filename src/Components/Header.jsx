@@ -13,9 +13,10 @@ export const Header = () => {
   return (
     <header className="top-app-bar">
       <div className="max-width-container header-container">
-        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-          <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
-          <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#0c3b32', fontFamily: 'Newsreader' }}>Mister Holistic</span>
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
+            <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
+          </h2>
         </Link>
         <nav className="nav-links">
           <Link to="/tienda" className="nav-item">Tienda</Link>

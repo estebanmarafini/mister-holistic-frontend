@@ -27,8 +27,8 @@ export const Tienda = () => {
 
         // Filtrar usando la columna 'categoria' de la base de datos
         if (activeCategory !== 'Todos') {
-          let dbCat = activeCategory.toLowerCase();
-          if (dbCat === 'holística') dbCat = 'holistica';
+          let dbCat = activeCategory.toUpperCase();
+          if (dbCat === 'HOLÍSTICA') dbCat = 'HOLISTICA';
           query = query.eq('categoria', dbCat);
         }
 
@@ -117,11 +117,6 @@ export const Tienda = () => {
                       alt={product.nombre}
                       className="product-image"
                     />
-                    {product.stock <= 3 && product.stock > 0 && (
-                      <div className="product-badge" style={{ backgroundColor: '#ffdad6', color: '#93000a' }}>
-                        Últimas {product.stock} u.
-                      </div>
-                    )}
                     {product.stock === 0 && (
                       <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
                         Agotado

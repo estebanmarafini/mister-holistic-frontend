@@ -152,9 +152,9 @@ export const Inicio = () => {
                         alt={product.nombre} 
                         className="product-image"
                       />
-                      {product.stock <= 3 && (
-                        <div className="product-badge" style={{ backgroundColor: '#ffdad6', color: '#93000a' }}>
-                          Últimas {product.stock} u.
+                      {product.stock === 0 && (
+                        <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
+                          Agotado
                         </div>
                       )}
                     </div>
