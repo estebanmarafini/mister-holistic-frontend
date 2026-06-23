@@ -15,7 +15,7 @@ export const Header = () => {
       <div className="max-width-container header-container">
         <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <h2 style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-            <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
+            <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '130px', width: 'auto', objectFit: 'contain' }} />
           </h2>
         </Link>
         <nav className="nav-links">
@@ -34,8 +34,8 @@ export const Header = () => {
             <span className="material-symbols-outlined">person</span>
             {user && <span style={{ fontSize: '10px', marginLeft: '4px', fontWeight: 'bold' }}>{user.nombre}</span>}
           </Link>
-          <button 
-            className="action-btn" 
+          <button
+            className="action-btn"
             onClick={() => setCartOpen(!cartOpen)}
             title="Carrito de compras"
           >
@@ -43,8 +43,8 @@ export const Header = () => {
             {totalQty > 0 && <span className="badge-count">{totalQty}</span>}
           </button>
           {user && (
-            <button 
-              className="action-btn" 
+            <button
+              className="action-btn"
               onClick={() => { logout(); navigate('/cuenta'); }}
               title="Cerrar Sesión"
               style={{ color: '#ba1a1a' }}

@@ -9,7 +9,7 @@ export const Footer = () => {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
               <h2 style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-                <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '32px', width: 'auto', objectFit: 'contain' }} />
+                <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '130px', width: 'auto', objectFit: 'contain' }} />
               </h2>
             </div>
             <p style={{ color: '#404846', fontSize: '14px', lineHeight: '1.6' }}>Cultivando tranquilidad y consciencia en cada rincón de tu hogar.</p>

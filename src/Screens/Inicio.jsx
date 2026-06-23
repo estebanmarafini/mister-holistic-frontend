@@ -34,14 +34,14 @@ export const Inicio = () => {
       {/* Hero Section */}
       <section style={{ position: 'relative', height: '650px', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <img 
-            src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1600" 
-            alt="Hero holistico" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          <img
+            src="/foto_portada.jpeg"
+            alt="Hero holistico"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(251,249,248,0.95), rgba(251,249,248,0.4), transparent)' }}></div>
         </div>
-        
+
         <div className="max-width-container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '550px' }}>
             <h1 className="text-display-lg" style={{ marginBottom: '16px', color: '#0c3b32' }}>Encuentra tu centro en lo cotidiano</h1>
@@ -70,10 +70,10 @@ export const Inicio = () => {
             {/* Categoría 1 */}
             <div onClick={() => navigate('/tienda?categoria=Sahumerios')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=350" 
-                  alt="Sahumerios" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=350"
+                  alt="Sahumerios"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
@@ -84,10 +84,10 @@ export const Inicio = () => {
             {/* Categoría 2 */}
             <div onClick={() => navigate('/tienda?categoria=Saphirus')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=350" 
-                  alt="Saphirus" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=350"
+                  alt="Saphirus"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
@@ -98,10 +98,10 @@ export const Inicio = () => {
             {/* Categoría 3 */}
             <div onClick={() => navigate('/tienda?categoria=Tarot')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=350" 
-                  alt="Tarot" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=350"
+                  alt="Tarot"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
@@ -112,10 +112,10 @@ export const Inicio = () => {
             {/* Categoría 4 */}
             <div onClick={() => navigate('/tienda?categoria=Holística')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=350" 
-                  alt="Holística" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=350"
+                  alt="Holística"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
@@ -147,9 +147,9 @@ export const Inicio = () => {
                 return (
                   <div key={product.id} className="product-card">
                     <div className="product-image-wrapper">
-                      <img 
-                        src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'} 
-                        alt={product.nombre} 
+                      <img
+                        src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'}
+                        alt={product.nombre}
                         className="product-image"
                       />
                       {product.stock === 0 && (
@@ -166,7 +166,7 @@ export const Inicio = () => {
                           <span className="product-price">${Number(price).toFixed(2)}</span>
                           <span className="product-price-label">{priceTier}</span>
                         </div>
-                        <button 
+                        <button
                           className="add-cart-circle-btn"
                           onClick={() => addToCart(product, 1)}
                           disabled={product.stock <= 0}
@@ -191,17 +191,17 @@ export const Inicio = () => {
           <div className="grid-bento-philosophy">
             <div className="col-span-7" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.06)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400" 
-                  alt="Meditación" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400"
+                  alt="Meditación"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
               <div style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.06)', marginTop: '32px' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=400" 
-                  alt="Esencias florales" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                <img
+                  src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=400"
+                  alt="Esencias florales"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
             </div>
@@ -237,8 +237,8 @@ export const Inicio = () => {
           <p className="text-body-lg" style={{ color: '#beecde', maxWidth: '600px', margin: '0 auto 32px' }}>
             Descubre nuestra colección completa y lleva la tranquilidad de Mister Holistic a tu hogar hoy mismo.
           </p>
-          <button 
-            className="btn-primary" 
+          <button
+            className="btn-primary"
             style={{ backgroundColor: '#ffffff', color: '#0c3b32' }}
             onClick={() => navigate('/tienda')}
           >
