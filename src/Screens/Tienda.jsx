@@ -13,9 +13,11 @@ export const Tienda = () => {
 
   // Normalizar el filtro de la URL para que coincida con los botones del frontend
   let activeCategory = rawCategory;
-  if (rawCategory === 'Joyas' || rawCategory === 'Bijou') activeCategory = 'Joyas Sagradas';
-  if (rawCategory === 'Velas') activeCategory = 'Velas Alquímicas';
-  if (rawCategory === 'Aromatizantes') activeCategory = 'Aromas';
+  const lowerRaw = rawCategory.toLowerCase();
+  if (lowerRaw === 'sahumerios') activeCategory = 'Sahumerios';
+  if (lowerRaw === 'saphirus') activeCategory = 'Saphirus';
+  if (lowerRaw === 'tarot') activeCategory = 'Tarot';
+  if (lowerRaw === 'holistica' || lowerRaw === 'holística') activeCategory = 'Holística';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,17 +25,11 @@ export const Tienda = () => {
       try {
         let query = supabase.from('productos').select('*').eq('disponibilidad', true);
 
-        // Aplicar filtros basados en la categoría normalizada buscando en el nombre de forma flexible
+        // Filtrar usando la columna 'categoria' de la base de datos
         if (activeCategory !== 'Todos') {
-          if (activeCategory === 'Aromas') {
-            query = query.or('nombre.ilike.%esencia%,nombre.ilike.%aceite%,nombre.ilike.%difusor%,nombre.ilike.%humidificador%,nombre.ilike.%aromatizador%');
-          } else if (activeCategory === 'Inciensos') {
-            query = query.or('nombre.ilike.%incienso%,nombre.ilike.%sahumerio%,nombre.ilike.%sahumo%,nombre.ilike.%bomba%,nombre.ilike.%pastilla%');
-          } else if (activeCategory === 'Joyas Sagradas') {
-            query = query.or('nombre.ilike.%dije%,nombre.ilike.%pulsera%,nombre.ilike.%collar%,nombre.ilike.%anillo%,nombre.ilike.%péndulo%,nombre.ilike.%cristal%,nombre.ilike.%gemas%,nombre.ilike.%piedra%,nombre.ilike.%cuarzo%,nombre.ilike.%tarot%,nombre.ilike.%oraculo%');
-          } else if (activeCategory === 'Velas Alquímicas') {
-            query = query.ilike('nombre', '%vela%');
-          }
+          let dbCat = activeCategory.toLowerCase();
+          if (dbCat === 'holística') dbCat = 'holistica';
+          query = query.eq('categoria', dbCat);
         }
 
         const { data, error } = await query;
@@ -87,7 +83,7 @@ export const Tienda = () => {
       {/* Filtros de Categorías */}
       <section style={{ marginBottom: '32px' }}>
         <div className="category-filters-container">
-          {['Todos', 'Aromas', 'Inciensos', 'Joyas Sagradas', 'Velas Alquímicas'].map((cat) => (
+          {['Todos', 'Sahumerios', 'Saphirus', 'Tarot', 'Holística'].map((cat) => (
             <button
               key={cat}
               className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}

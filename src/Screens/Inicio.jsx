@@ -68,25 +68,11 @@ export const Inicio = () => {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '24px' }}>
             {/* Categoría 1 */}
-            <div onClick={() => navigate('/tienda?categoria=Aromas')} style={{ cursor: 'pointer', textAlign: 'center' }}>
-              <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=350" 
-                  alt="Aromas" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                />
-              </div>
-              <h3 className="text-headline-md">Aromatizantes</h3>
-            </div>
-
-            {/* Categoría 2 */}
-            <div onClick={() => navigate('/tienda?categoria=Inciensos')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+            <div onClick={() => navigate('/tienda?categoria=Sahumerios')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img 
                   src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=350" 
-                  alt="Inciensos" 
+                  alt="Sahumerios" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -95,32 +81,46 @@ export const Inicio = () => {
               <h3 className="text-headline-md">Sahumerios</h3>
             </div>
 
-            {/* Categoría 3 */}
-            <div onClick={() => navigate('/tienda?categoria=Joyas')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+            {/* Categoría 2 */}
+            <div onClick={() => navigate('/tienda?categoria=Saphirus')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img 
-                  src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=350" 
-                  alt="Joyas" 
+                  src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=350" 
+                  alt="Saphirus" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
               </div>
-              <h3 className="text-headline-md">Bijou</h3>
+              <h3 className="text-headline-md">Saphirus</h3>
+            </div>
+
+            {/* Categoría 3 */}
+            <div onClick={() => navigate('/tienda?categoria=Tarot')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+              <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
+                <img 
+                  src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=350" 
+                  alt="Tarot" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                />
+              </div>
+              <h3 className="text-headline-md">Tarot</h3>
             </div>
 
             {/* Categoría 4 */}
-            <div onClick={() => navigate('/tienda?categoria=Velas')} style={{ cursor: 'pointer', textAlign: 'center' }}>
+            <div onClick={() => navigate('/tienda?categoria=Holística')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img 
-                  src="https://images.unsplash.com/photo-1602872030219-c183cf40905d?q=80&w=350" 
-                  alt="Velas" 
+                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=350" 
+                  alt="Holística" 
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }} 
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
                   onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
               </div>
-              <h3 className="text-headline-md">Velas</h3>
+              <h3 className="text-headline-md">Línea Holística</h3>
             </div>
           </div>
         </div>

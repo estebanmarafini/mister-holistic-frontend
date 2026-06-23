@@ -7,7 +7,10 @@ export const Footer = () => {
       <div className="max-width-container" style={{ padding: '64px 32px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px', marginBottom: '32px' }}>
           <div>
-            <h3 style={{ fontFamily: 'Newsreader', fontSize: '24px', color: '#0c3b32', marginBottom: '16px' }}>Mister Holistic</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+              <h3 style={{ fontFamily: 'Newsreader', fontSize: '24px', color: '#0c3b32', margin: 0 }}>Mister Holistic</h3>
+            </div>
             <p style={{ color: '#404846', fontSize: '14px', lineHeight: '1.6' }}>Cultivando tranquilidad y consciencia en cada rincón de tu hogar.</p>
           </div>
           <div>

@@ -13,13 +13,16 @@ export const Header = () => {
   return (
     <header className="top-app-bar">
       <div className="max-width-container header-container">
-        <Link to="/" className="logo">
-          Mister Holistic
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+          <img src="/Logo mister holistic.png" alt="Mister Holistic Logo" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
+          <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#0c3b32', fontFamily: 'Newsreader' }}>Mister Holistic</span>
         </Link>
         <nav className="nav-links">
           <Link to="/tienda" className="nav-item">Tienda</Link>
-          <Link to="/tienda?categoria=Aromas" className="nav-item">Aromas</Link>
-          <Link to="/tienda?categoria=Inciensos" className="nav-item">Inciensos</Link>
+          <Link to="/tienda?categoria=Sahumerios" className="nav-item">Sahumerios</Link>
+          <Link to="/tienda?categoria=Saphirus" className="nav-item">Saphirus</Link>
+          <Link to="/tienda?categoria=Tarot" className="nav-item">Tarot</Link>
+          <Link to="/tienda?categoria=Holística" className="nav-item">Holística</Link>
           <Link to="/contacto" className="nav-item">Contacto</Link>
           {user?.rol === 'admin' && (
             <Link to="/admin" className="nav-item" style={{ color: '#695d43', fontWeight: 'bold' }}>Dashboard Admin</Link>
