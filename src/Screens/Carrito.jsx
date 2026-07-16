@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../Hooks/useCart';
 import { useAuth } from '../Hooks/useAuth';
+import { ProductImage } from '../Components/ProductImage';
+import { formatPrice } from '../Config/utils';
+
+
 
 export const Carrito = () => {
   const { 
@@ -81,9 +85,8 @@ export const Carrito = () => {
                 return (
                   <div key={item.id} style={{ display: 'flex', gap: '20px', backgroundColor: '#ffffff', padding: '20px', borderRadius: '12px', boxShadow: '0 2px 10px rgba(0,0,0,0.02)', border: '1px solid #efeded', alignItems: 'center' }}>
                     <div style={{ width: '100px', height: '100px', borderRadius: '8px', overflow: 'hidden', backgroundColor: '#efeded', flexShrink: 0 }}>
-                      <img 
-                        src={item.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=256'} 
-                        alt={item.nombre} 
+                      <ProductImage 
+                        product={item} 
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                       />
                     </div>
@@ -109,7 +112,7 @@ export const Carrito = () => {
                         >+</button>
                       </div>
                       <span style={{ fontSize: '18px', fontFamily: 'Newsreader', fontWeight: 'bold', color: '#0c3b32' }}>
-                        ${(price * item.cantidad).toFixed(2)}
+                        {formatPrice(price * item.cantidad)}
                       </span>
                       <button 
                         style={{ color: '#ba1a1a', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '13px', fontWeight: 'bold' }}
@@ -141,7 +144,7 @@ export const Carrito = () => {
                 {discountAmount > 0 && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', color: '#ba1a1a' }}>
                     <span>Descuento (10%)</span>
-                    <span>-${discountAmount.toFixed(2)}</span>
+                    <span>-{formatPrice(discountAmount)}</span>
                   </div>
                 )}
               </div>
@@ -178,7 +181,7 @@ export const Carrito = () => {
                   <span style={{ fontSize: '18px', fontFamily: 'Newsreader', fontWeight: 'bold' }}>Total:</span>
                   <div style={{ textAlign: 'right' }}>
                     <span style={{ fontSize: '26px', fontFamily: 'Newsreader', fontWeight: 'bold', color: '#0c3b32', display: 'block', lineHeight: '1' }}>
-                      ${finalTotal.toFixed(2)}
+                      {formatPrice(finalTotal)}
                     </span>
                     <span style={{ fontSize: '10px', color: '#717976' }}>IVA incluido (presupuesto)</span>
                   </div>

@@ -2,6 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../Hooks/useCart';
 import { useAuth } from '../Hooks/useAuth';
+import { ProductImage } from './ProductImage';
+import { formatPrice } from '../Config/utils';
+
+
 
 export const CartDrawer = () => {
   const { 
@@ -69,16 +73,15 @@ export const CartDrawer = () => {
               return (
                 <div key={item.id} style={{ display: 'flex', gap: '16px', borderBottom: '1px solid #efeded', paddingBottom: '16px' }}>
                   <div style={{ width: '80px', height: '80px', overflow: 'hidden', borderRadius: '8px', backgroundColor: '#efeded' }}>
-                    <img 
-                      src={item.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=256'} 
-                      alt={item.nombre} 
+                    <ProductImage 
+                      product={item} 
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                     />
                   </div>
                   <div style={{ flexGrow: 1 }}>
                     <h4 style={{ fontFamily: 'Newsreader', fontSize: '18px', color: '#0c3b32', marginBottom: '4px' }}>{item.nombre}</h4>
                     <p style={{ fontSize: '14px', color: '#695d43', fontWeight: 'bold' }}>
-                      ${Number(price).toFixed(2)} 
+                      {formatPrice(price)} 
                       <span style={{ fontSize: '11px', color: '#717976', textTransform: 'uppercase', marginLeft: '6px' }}>
                         ({priceTier})
                       </span>
@@ -117,7 +120,7 @@ export const CartDrawer = () => {
           <div className="drawer-footer">
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px', borderTop: '2px solid #efeded', paddingTop: '16px' }}>
               <span style={{ fontSize: '18px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>Total:</span>
-              <span style={{ fontSize: '20px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>${getTotal().toFixed(2)}</span>
+              <span style={{ fontSize: '20px', fontFamily: 'Newsreader', color: '#0c3b32', fontWeight: 'bold' }}>{formatPrice(getTotal())}</span>
             </div>
             
             <button 

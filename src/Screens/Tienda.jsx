@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { supabase } from '../Config/supabase';
 import { useCart } from '../Hooks/useCart';
+import { ProductImage } from '../Components/ProductImage';
+import { formatPrice } from '../Config/utils';
+
 
 export const Tienda = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { addToCart, priceTier, togglePriceTier } = useCart();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const rawCategory = searchParams.get('categoria') || 'Todos';
 
@@ -45,6 +49,7 @@ export const Tienda = () => {
   }, [activeCategory]);
 
   const handleCategorySelect = (category) => {
+    setSearchQuery('');
     if (category === 'Todos') {
       searchParams.delete('categoria');
     } else {
@@ -95,29 +100,52 @@ export const Tienda = () => {
         </div>
       </section>
 
+      {/* Buscador de Productos */}
+      <div className="search-container">
+        <div className="search-input-wrapper">
+          <span className="material-symbols-outlined search-input-icon">search</span>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Buscar por nombre de producto..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button
+              className="search-clear-btn"
+              onClick={() => setSearchQuery('')}
+              title="Limpiar búsqueda"
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* Grid de Productos */}
       <section>
         {loading ? (
           <div style={{ textAlign: 'center', padding: '64px', fontSize: '18px', color: '#717976' }}>
             Alineando esencias holísticas...
           </div>
-        ) : products.length === 0 ? (
+        ) : (products.filter(p => p.nombre.toLowerCase().includes(searchQuery.toLowerCase())).length === 0) ? (
           <div style={{ textAlign: 'center', padding: '64px', color: '#717976' }}>
-            No se encontraron productos disponibles en esta categoría.
+            {products.length === 0
+              ? 'No se encontraron productos disponibles en esta categoría.'
+              : 'No se encontraron productos que coincidan con la búsqueda.'}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
-            {products.map((product) => {
-              const price = priceTier === 'mayorista' ? product.precio_mayorista : product.precio_minorista;
-              return (
-                <div key={product.id} className="product-card">
-                  <div className="product-image-wrapper">
-                    <img
-                      src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'}
-                      alt={product.nombre}
-                      className="product-image"
-                    />
-                    {product.stock === 0 && (
+            {products
+              .filter(p => p.nombre.toLowerCase().includes(searchQuery.toLowerCase()))
+              .map((product) => {
+                const price = priceTier === 'mayorista' ? product.precio_mayorista : product.precio_minorista;
+                return (
+                  <div key={product.id} className="product-card">
+                    <div className="product-image-wrapper">
+                      <ProductImage product={product} className="product-image" />
+                      {product.stock === 0 && (
                       <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
                         Agotado
                       </div>
@@ -128,7 +156,7 @@ export const Tienda = () => {
                     <p className="product-desc">Un elemento artesanal para complementar tu ritual de introspección y bienestar natural.</p>
                     <div className="product-price-row">
                       <div className="product-price-box">
-                        <span className="product-price">${Number(price).toFixed(2)}</span>
+                        <span className="product-price">{formatPrice(price)}</span>
                         <span className="product-price-label">{priceTier}</span>
                       </div>
                       <button

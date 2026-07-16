@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../Config/supabase';
 import { useCart } from '../Hooks/useCart';
+import { ProductImage } from '../Components/ProductImage';
+import { formatPrice } from '../Config/utils';
+
+
 
 export const Inicio = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -147,11 +151,7 @@ export const Inicio = () => {
                 return (
                   <div key={product.id} className="product-card">
                     <div className="product-image-wrapper">
-                      <img
-                        src={product.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500'}
-                        alt={product.nombre}
-                        className="product-image"
-                      />
+                      <ProductImage product={product} className="product-image" />
                       {product.stock === 0 && (
                         <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
                           Agotado
@@ -163,7 +163,7 @@ export const Inicio = () => {
                       <p className="product-desc">Un elemento natural perfecto para propiciar momentos de introspección y calma profunda.</p>
                       <div className="product-price-row">
                         <div className="product-price-box">
-                          <span className="product-price">${Number(price).toFixed(2)}</span>
+                          <span className="product-price">{formatPrice(price)}</span>
                           <span className="product-price-label">{priceTier}</span>
                         </div>
                         <button

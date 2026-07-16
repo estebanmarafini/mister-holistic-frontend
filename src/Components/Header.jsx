@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 import { useCart } from '../Hooks/useCart';
+import { FloatingWhatsApp } from 'react-floating-whatsapp';
+
 
 export const Header = () => {
   const { user, logout } = useAuth();
@@ -52,8 +54,31 @@ export const Header = () => {
               <span className="material-symbols-outlined">logout</span>
             </button>
           )}
+          <FloatingWhatsApp
+            phoneNumber="5493834359155"
+            accountName="Mister Holistic"
+            statusMessage="Available"
+            chatMessage="Hola, en que podemos ayudarte?"
+            avatar="/Logo mister holistic.png"
+            allowClickAway
+            allowEsc
+          />
+        </div>
+      </div>
+      
+      {/* Ticker Banner (Marquee) */}
+      <div className="ticker-banner">
+        <div className="ticker-track">
+          {Array(6).fill("Compra mínima por mayor $40.000,00").map((text, i) => (
+            <span key={i}>{text}</span>
+          ))}
+          {Array(6).fill("Compra mínima por mayor $40.000,00").map((text, i) => (
+            <span key={`dup-${i}`}>{text}</span>
+          ))}
         </div>
       </div>
     </header>
   );
 };
+
+

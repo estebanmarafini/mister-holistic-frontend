@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Hooks/useAuth';
 import { supabase } from '../Config/supabase';
+import { formatPrice } from '../Config/utils';
+
 
 export const MiCuenta = () => {
   const {
@@ -506,7 +508,7 @@ export const MiCuenta = () => {
 
                         <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
                           <span style={{ fontWeight: 'bold', color: '#0c3b32', fontSize: '16px' }}>
-                            Subtotal: ${subtotal.toFixed(2)}
+                            Subtotal: {formatPrice(subtotal)}
                           </span>
                           <span className={`badge ${badgeClass}`}>
                             {order.estado}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../Hooks/useAuth';
 import { supabase } from '../Config/supabase';
+import { formatPrice } from '../Config/utils';
+
 
 const API_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api';
 
@@ -490,8 +492,8 @@ export const AdminDashboard = () => {
                       <tr key={prod.id}>
                         <td style={{ fontWeight: 'bold' }}>#{prod.id}</td>
                         <td>{prod.nombre}</td>
-                        <td>${Number(prod.precio_minorista).toFixed(2)}</td>
-                        <td>${Number(prod.precio_mayorista).toFixed(2)}</td>
+                        <td>{formatPrice(prod.precio_minorista)}</td>
+                        <td>{formatPrice(prod.precio_mayorista)}</td>
                         <td style={{ fontWeight: 'bold', color: prod.stock <= 3 ? '#ba1a1a' : 'inherit' }}>{prod.stock} u.</td>
                         <td>
                           <span className={`badge ${prod.disponibilidad ? 'badge-approved' : 'badge-rejected'}`}>
