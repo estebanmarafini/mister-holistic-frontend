@@ -41,14 +41,22 @@ export const Inicio = () => {
           <img
             src="/foto_portada.jpeg"
             alt="Hero holistico"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{
+              width: 'calc(100% + 100px)',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'left center'
+            }}
           />
+
+
+
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(251,249,248,0.95), rgba(251,249,248,0.4), transparent)' }}></div>
         </div>
 
         <div className="max-width-container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ maxWidth: '550px' }}>
-            <h1 className="text-display-lg" style={{ marginBottom: '16px', color: '#0c3b32' }}>Encuentra tu centro en lo cotidiano</h1>
+            <h1 className="text-display-lg" style={{ marginBottom: '16px', color: '#0c3b32' }}>Encontrá tu centro en lo cotidiano</h1>
             <p className="text-body-lg" style={{ marginBottom: '32px' }}>
               Bienvenido a Mister Holistic. Un espacio dedicado a la pausa, el ritual y la conexión profunda a través de aromas y elementos naturales curados para tu bienestar.
             </p>
@@ -211,20 +219,7 @@ export const Inicio = () => {
               <p className="text-body-lg" style={{ marginBottom: '24px' }}>
                 En Mister Holistic, creemos que cada aroma cuenta una historia y cada objeto tiene el poder de transformar un espacio en un santuario. Nuestra filosofía se basa en la selección consciente de elementos que promueven la calma, la claridad y el bienestar integral.
               </p>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span className="material-symbols-outlined" style={{ color: '#0c3b32' }}>eco</span>
-                  <span style={{ fontWeight: '500' }}>Materiales 100% naturales y sostenibles</span>
-                </li>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span className="material-symbols-outlined" style={{ color: '#0c3b32' }}>auto_awesome</span>
-                  <span style={{ fontWeight: '500' }}>Curaduría experta en bienestar holístico</span>
-                </li>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <span className="material-symbols-outlined" style={{ color: '#0c3b32' }}>volunteer_activism</span>
-                  <span style={{ fontWeight: '500' }}>Artesanía con propósito y tradición</span>
-                </li>
-              </ul>
+
             </div>
           </div>
         </div>
@@ -233,9 +228,9 @@ export const Inicio = () => {
       {/* CTA Banner */}
       <section style={{ padding: '64px 0', backgroundColor: '#0c3b32', color: '#ffffff', textAlign: 'center' }}>
         <div className="max-width-container">
-          <h2 className="text-display-lg" style={{ color: '#ffffff', marginBottom: '16px' }}>Comienza tu viaje hacia la calma</h2>
+          <h2 className="text-display-lg" style={{ color: '#ffffff', marginBottom: '16px' }}>Comenzá tu viaje hacia la calma</h2>
           <p className="text-body-lg" style={{ color: '#beecde', maxWidth: '600px', margin: '0 auto 32px' }}>
-            Descubre nuestra colección completa y lleva la tranquilidad de Mister Holistic a tu hogar hoy mismo.
+            Descubrí nuestra colección completa y llevá la tranquilidad de Mister Holistic a tu hogar hoy mismo.
           </p>
           <button
             className="btn-primary"

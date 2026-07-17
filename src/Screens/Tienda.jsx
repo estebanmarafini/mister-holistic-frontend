@@ -64,7 +64,7 @@ export const Tienda = () => {
       <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '48px' }}>
         <h1 className="text-display-lg" style={{ marginBottom: '16px' }}>Tienda Holística</h1>
         <p className="text-body-lg" style={{ maxWidth: '650px', marginBottom: '32px' }}>
-          Curando herramientas para tu paz interior. Explora nuestra selección de aromas, joyas y rituales ancestrales.
+          Te damos la bienvenida a un espacio creado para acompañarte en tu camino de bienestar, equilibrio y conexión. Descubrí una cuidada selección de aromas, cristales, joyas, sahumerios y elementos inspirados en rituales ancestrales, pensados para armonizar tu energía y convertir cada momento en una experiencia de calma y conciencia.
         </p>
 
         {/* Pricing Toggle Component */}
@@ -146,33 +146,33 @@ export const Tienda = () => {
                     <div className="product-image-wrapper">
                       <ProductImage product={product} className="product-image" />
                       {product.stock === 0 && (
-                      <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
-                        Agotado
+                        <div className="product-badge" style={{ backgroundColor: '#eae8e7', color: '#717976' }}>
+                          Agotado
+                        </div>
+                      )}
+                    </div>
+                    <div className="product-info">
+                      <h3 className="product-title">{product.nombre}</h3>
+                      <p className="product-desc">Un elemento artesanal para complementar tu ritual de introspección y bienestar natural.</p>
+                      <div className="product-price-row">
+                        <div className="product-price-box">
+                          <span className="product-price">{formatPrice(price)}</span>
+                          <span className="product-price-label">{priceTier}</span>
+                        </div>
+                        <button
+                          className="add-cart-circle-btn"
+                          onClick={() => addToCart(product, 1)}
+                          disabled={product.stock <= 0}
+                          title={product.stock <= 0 ? 'Sin Stock' : 'Añadir al Carrito'}
+                          style={product.stock <= 0 ? { backgroundColor: '#c0c8c4', cursor: 'not-allowed' } : {}}
+                        >
+                          <span className="material-symbols-outlined">add_shopping_cart</span>
+                        </button>
                       </div>
-                    )}
-                  </div>
-                  <div className="product-info">
-                    <h3 className="product-title">{product.nombre}</h3>
-                    <p className="product-desc">Un elemento artesanal para complementar tu ritual de introspección y bienestar natural.</p>
-                    <div className="product-price-row">
-                      <div className="product-price-box">
-                        <span className="product-price">{formatPrice(price)}</span>
-                        <span className="product-price-label">{priceTier}</span>
-                      </div>
-                      <button
-                        className="add-cart-circle-btn"
-                        onClick={() => addToCart(product, 1)}
-                        disabled={product.stock <= 0}
-                        title={product.stock <= 0 ? 'Sin Stock' : 'Añadir al Carrito'}
-                        style={product.stock <= 0 ? { backgroundColor: '#c0c8c4', cursor: 'not-allowed' } : {}}
-                      >
-                        <span className="material-symbols-outlined">add_shopping_cart</span>
-                      </button>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         )}
       </section>
