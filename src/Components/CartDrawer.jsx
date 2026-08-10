@@ -97,9 +97,6 @@ export const CartDrawer = () => {
                         style={{ border: '1px solid #c0c8c4', width: '24px', height: '24px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}
                         onClick={() => updateQuantity(item.id, item.cantidad + 1, item.stock)}
                       >+</button>
-                      <span style={{ fontSize: '11px', color: '#717976', marginLeft: '6px' }}>
-                        Stock: {item.stock}
-                      </span>
                     </div>
                   </div>
                   <div>

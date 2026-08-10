@@ -139,6 +139,7 @@ export const Tienda = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
             {products
               .filter(p => p.nombre.toLowerCase().includes(searchQuery.toLowerCase()))
+              .sort((a, b) => (b.stock > 0 ? 1 : 0) - (a.stock > 0 ? 1 : 0))
               .map((product) => {
                 const price = priceTier === 'mayorista' ? product.precio_mayorista : product.precio_minorista;
                 return (
