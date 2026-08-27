@@ -83,7 +83,7 @@ export const Inicio = () => {
             <div onClick={() => navigate('/tienda?categoria=Sahumerios')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=350"
+                  src="../sahumerio.jpg"
                   alt="Sahumerios"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
@@ -97,7 +97,7 @@ export const Inicio = () => {
             <div onClick={() => navigate('/tienda?categoria=Saphirus')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=350"
+                  src="../saphirus.jpg"
                   alt="Saphirus"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
@@ -111,7 +111,7 @@ export const Inicio = () => {
             <div onClick={() => navigate('/tienda?categoria=Tarot')} style={{ cursor: 'pointer', textAlign: 'center' }}>
               <div style={{ aspectRatio: '4/5', overflow: 'hidden', borderRadius: '16px', marginBottom: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=350"
+                  src="/tarot.jpg"
                   alt="Tarot"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
                   onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
