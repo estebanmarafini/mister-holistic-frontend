@@ -16,7 +16,11 @@ export const ProductImage = ({ product, className, style }) => {
       return `${BASE_IMAGE_URL}${product.imagen}`;
     }
 
-    // Fallback directly to default placeholder if no image URL is provided in DB
+    // If no custom image column in DB, request image by product ID from backend
+    if (product.id) {
+      return `${BASE_IMAGE_URL}${product.id}.jpg`;
+    }
+
     return DEFAULT_IMAGE;
   };
 
