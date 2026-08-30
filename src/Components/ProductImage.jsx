@@ -1,53 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500';
+const BASE_IMAGE_URL = 'https://api.misterholistic.com.ar/imagenes/productos/';
 
 export const ProductImage = ({ product, className, style }) => {
-  const base = 'https://api.misterholistic.com.ar/imagenes/productos/';
-  const defaultImg = product?.imagen || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500';
+  // Determine initial image source without brute-forcing multiple extensions
+  const getInitialSrc = () => {
+    if (!product) return DEFAULT_IMAGE;
 
-  // Generate candidate URLs using only the ID and extensions
-  const getCandidateUrls = () => {
-    if (!product || !product.id) {
-      return [defaultImg];
+    // If product has a custom URL/path stored in DB
+    if (product.imagen) {
+      if (product.imagen.startsWith('http://') || product.imagen.startsWith('https://')) {
+        return product.imagen;
+      }
+      return `${BASE_IMAGE_URL}${product.imagen}`;
     }
 
-    const extensions = ['jpg', 'png', 'webp', 'jpeg', 'JPG', 'PNG', 'WEBP'];
-    const urls = [];
-
-    // Try ID with each extension
-    extensions.forEach(ext => {
-      urls.push(`${base}${product.id}.${ext}`);
-    });
-
-    // Finally, fallback to database image or default
-    urls.push(defaultImg);
-
-    return urls;
+    // Fallback directly to default placeholder if no image URL is provided in DB
+    return DEFAULT_IMAGE;
   };
 
-  const [candidates, setCandidates] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imgSrc, setImgSrc] = useState(getInitialSrc);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    const urls = getCandidateUrls();
-    setCandidates(urls);
-    setCurrentIndex(0);
-  }, [product?.id, defaultImg]);
+    setImgSrc(getInitialSrc());
+    setHasError(false);
+  }, [product?.id, product?.imagen]);
 
   const handleError = () => {
-    if (currentIndex < candidates.length - 1) {
-      setCurrentIndex(prev => prev + 1);
+    if (!hasError) {
+      setHasError(true);
+      setImgSrc(DEFAULT_IMAGE);
     }
   };
-
-  const currentSrc = candidates[currentIndex] || defaultImg;
 
   return (
     <img
-      src={currentSrc}
+      src={imgSrc}
       alt={product?.nombre || 'Producto'}
       className={className}
       style={style}
+      loading="lazy"
       onError={handleError}
     />
   );
 };
+
