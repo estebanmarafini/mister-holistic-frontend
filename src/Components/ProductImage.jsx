@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500';
-const BASE_IMAGE_URL = 'https://api.misterholistic.com.ar/imagenes/productos/';
+
+const getBaseImageUrl = () => {
+  const backendApiUrl = import.meta.env.VITE_BACKEND_API_URL;
+  if (backendApiUrl) {
+    const base = backendApiUrl.replace(/\/api\/?$/, '');
+    return `${base}/imagenes/productos/`;
+  }
+  return 'https://api.misterholistic.com.ar/imagenes/productos/';
+};
 
 export const ProductImage = ({ product, className, style }) => {
+  const BASE_IMAGE_URL = getBaseImageUrl();
+
   // Determine initial image source without brute-forcing multiple extensions
   const getInitialSrc = () => {
     if (!product) return DEFAULT_IMAGE;
@@ -13,7 +23,8 @@ export const ProductImage = ({ product, className, style }) => {
       if (product.imagen.startsWith('http://') || product.imagen.startsWith('https://')) {
         return product.imagen;
       }
-      return `${BASE_IMAGE_URL}${product.imagen}`;
+      const cleanPath = product.imagen.replace(/^\/?(imagenes\/productos\/)?/, '');
+      return `${BASE_IMAGE_URL}${cleanPath}`;
     }
 
     // If no custom image column in DB, request image by product ID from backend
