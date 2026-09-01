@@ -1,42 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=500';
-
-const getBaseImageUrl = () => {
-  const backendApiUrl = import.meta.env.VITE_BACKEND_API_URL;
-  if (backendApiUrl) {
-    // Standardize URL: use backend URL (handling with or without /api prefix)
-    const cleanBase = backendApiUrl.replace(/\/$/, '');
-    return cleanBase.endsWith('/api')
-      ? `${cleanBase}/imagenes/productos/`
-      : `${cleanBase}/api/imagenes/productos/`;
-  }
-  return 'https://api.misterholistic.com.ar/api/imagenes/productos/';
-};
+const R2_BASE_URL = (import.meta.env.VITE_CLOUDFLARE_R2_URL || import.meta.env.VITE_IMAGE_BASE_URL || 'https://pub-d5f5c07266ad46b791fbc7e26c905fef.r2.dev/').replace(/\/$/, '') + '/';
 
 export const ProductImage = ({ product, className, style }) => {
-  const BASE_IMAGE_URL = getBaseImageUrl();
-
   // Determine initial image source without brute-forcing multiple extensions
   const getInitialSrc = () => {
     if (!product) return DEFAULT_IMAGE;
 
     // If product has a custom image path/URL stored in DB
     if (product.imagen) {
-      // If the image URL is an Unsplash seed sample, ignore it and prefer local backend image by product ID
+      // If the image URL is an Unsplash seed sample, ignore it and prefer Cloudflare R2 image by product ID
       if (product.imagen.includes('unsplash.com') && product.id) {
-        return `${BASE_IMAGE_URL}${product.id}.jpg`;
+        return `${R2_BASE_URL}${product.id}.jpg`;
       }
       if (product.imagen.startsWith('http://') || product.imagen.startsWith('https://')) {
         return product.imagen;
       }
       const cleanPath = product.imagen.replace(/^\/?(api\/)?(imagenes\/productos\/)?/, '');
-      return `${BASE_IMAGE_URL}${cleanPath}`;
+      return `${R2_BASE_URL}${cleanPath}`;
     }
 
-    // If no custom image column in DB, request image by product ID from backend
+    // Default: request image by product ID from Cloudflare R2 bucket
     if (product.id) {
-      return `${BASE_IMAGE_URL}${product.id}.jpg`;
+      return `${R2_BASE_URL}${product.id}.jpg`;
     }
 
     return DEFAULT_IMAGE;
@@ -51,7 +38,11 @@ export const ProductImage = ({ product, className, style }) => {
   }, [product?.id, product?.imagen]);
 
   const handleError = () => {
-    if (!hasError) {
+    if (imgSrc.endsWith('.jpg')) {
+      setImgSrc(imgSrc.replace(/\.jpg$/, '.png'));
+    } else if (imgSrc.endsWith('.png')) {
+      setImgSrc(imgSrc.replace(/\.png$/, '.webp'));
+    } else if (!hasError) {
       setHasError(true);
       setImgSrc(DEFAULT_IMAGE);
     }
